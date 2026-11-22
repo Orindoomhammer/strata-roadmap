@@ -65,7 +65,7 @@ p{margin:0 0 1em}
 
 /* hero */
 .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
-.hero-bg{position:absolute; inset:0; background:url(../img/keyart.jpg) center 38%/cover no-repeat;
+.hero-bg{position:absolute; inset:0; background:url(../img/keyart.webp) center 38%/cover no-repeat;
   opacity:.5}
 .hero-bg::after{content:""; position:absolute; inset:0;
   background:linear-gradient(180deg,

@@ -11,8 +11,20 @@ VERSION = re.search(r'^version = "([^"]+)"',
 
 ITCH = 'https://orindoomhammer.itch.io/strata'
 STEAM = 'https://store.steampowered.com/app/4791200/'
-STEAM_DEMO = 'https://store.steampowered.com/app/4865260/'
+# Steam has no public store page for a demo app id: 4865260 redirects to the
+# parent, which is where the Download Demo button lives. Link there directly.
+STEAM_DEMO = STEAM
 ROADMAP = 'https://github.com/Orindoomhammer/strata-roadmap'
+# Where the built site is served from. Must end in a slash; it is what the
+# canonical, og:url and sitemap entries are built on. Change this one line
+# when a custom domain takes over.
+SITE_URL = 'https://orindoomhammer.github.io/strata-roadmap/'
+
+try:
+    IMAGES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                         'images.json'), encoding='utf-8'))
+except OSError:
+    IMAGES = {}
 
 CAT_ORDER = ['Generators', 'Filters', 'Analysis', 'Composite', 'Math', 'Values', 'Output']
 PIN_CLASS = {'Height': 'height', 'Mask': 'mask', 'Scalar': 'scalar'}
@@ -40,7 +52,12 @@ def paras(text):
 
 
 # ---------------------------------------------------------------- shell
+PAGE_FILE = {'home': 'index.html', 'nodes': 'nodes.html', 'changelog': 'changelog.html'}
+
+
 def page(title, desc, body, active, extra_head='', extra_js=''):
+    # the landing page is the site root, so its canonical drops index.html
+    canonical = SITE_URL + ('' if active == 'home' else PAGE_FILE[active])
     nav = ''.join(
         f'<a href="{href}"{" class=on" if key == active else ""}>{label}</a>'
         for key, href, label in [('home', 'index.html', 'Overview'),
@@ -53,10 +70,24 @@ def page(title, desc, body, active, extra_head='', extra_js=''):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
+<link rel="canonical" href="{canonical}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
-<meta property="og:image" content="img/keyart.jpg">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{SITE_URL}og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Strata key art: a glowing node graph laid over a mountain range">
+<meta property="og:site_name" content="Strata">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:image" content="{SITE_URL}og.jpg">
+<meta name="theme-color" content="#0b0e13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="css/site.css">
 {extra_head}
 </head>
@@ -98,7 +129,11 @@ def page(title, desc, body, active, extra_head='', extra_js=''):
 
 # ---------------------------------------------------------------- landing
 def shot(src, alt, cap):
-    return (f'<figure class="shot"><img src="img/{src}" alt="{e(alt)}" loading="lazy">'
+    name = src.rsplit('.', 1)[0] + '.webp'
+    wh = IMAGES.get(name)
+    dims = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
+    return (f'<figure class="shot"><img src="img/{name}" alt="{e(alt)}"{dims} '
+            f'loading="lazy" decoding="async">'
             f'<figcaption>{inline(e(cap))}</figcaption></figure>')
 
 
@@ -628,7 +663,7 @@ p{margin:0 0 1em}
 
 /* hero */
 .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
-.hero-bg{position:absolute; inset:0; background:url(../img/keyart.jpg) center 38%/cover no-repeat;
+.hero-bg{position:absolute; inset:0; background:url(../img/keyart.webp) center 38%/cover no-repeat;
   opacity:.5}
 .hero-bg::after{content:""; position:absolute; inset:0;
   background:linear-gradient(180deg,
@@ -782,6 +817,20 @@ section.wrap.narrow{padding-top:66px; padding-bottom:0}
 
 os.makedirs(os.path.join(OUT, 'css'), exist_ok=True)
 w = lambda p, s: open(os.path.join(OUT, p), 'w', encoding='utf-8', newline='\n').write(s)
+ROBOTS = f"""User-agent: *
+Allow: /
+
+Sitemap: {SITE_URL}sitemap.xml
+"""
+
+SITEMAP = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+           ''.join(f'  <url><loc>{SITE_URL}{p}</loc></url>\n'
+                   for p in ('', 'nodes.html', 'changelog.html')) +
+           '</urlset>\n')
+
+w('robots.txt', ROBOTS)
+w('sitemap.xml', SITEMAP)
 w('index.html', landing())
 w('nodes.html', nodes_page())
 w('changelog.html', changelog_page())
