@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strata — node-based terrain editor</title>
+<meta name="description" content="Build landscapes from a node graph, erode them, carve rivers and roads, then walk the result at player scale before exporting to Unreal Engine 5, Unity, Godot, O3DE or Leadwerks.">
+<meta property="og:title" content="Strata — node-based terrain editor">
+<meta property="og:description" content="Build landscapes from a node graph, erode them, carve rivers and roads, then walk the result at player scale before exporting to Unreal Engine 5, Unity, Godot, O3DE or Leadwerks.">
+<meta property="og:image" content="img/keyart.jpg">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="index.html"><span class="chev"></span>STRATA</a>
+    <nav><a href="index.html" class=on>Overview</a><a href="nodes.html">Node reference</a><a href="changelog.html">Changelog</a></nav>
+    <a class="btn small" href="https://orindoomhammer.itch.io/strata" rel="noopener">Get it</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" role="presentation"></div>
+  <div class="wrap hero-in">
+    <p class="kicker">Node-based terrain editor · Windows &amp; Linux</p>
+    <h1>Build worlds,<br>not formulas.</h1>
+    <p class="lead big">Connect generators, filters and masks in a node graph. Watch the terrain
+    take shape in a live 2D preview and a textured 3D viewport — then walk it on foot, at player
+    scale, to find out what it actually feels like to cross. Then export a heightmap your engine
+    reads directly.</p>
+    <p class="cta">
+      <a class="btn" href="https://orindoomhammer.itch.io/strata" rel="noopener">Buy on itch.io</a>
+      <a class="btn ghost" href="https://store.steampowered.com/app/4791200/" rel="noopener">Buy on Steam</a>
+      <a class="btn ghost" href="https://store.steampowered.com/app/4865260/" rel="noopener">Try the free demo</a>
+    </p>
+    <p class="dim small">No launcher, no account, no DRM. Native on Windows and Linux, including Steam Deck.</p>
+  </div>
+</section>
+
+<section class="wrap stats">
+  <div><b>39</b><span>nodes</span></div>
+  <div><b>12</b><span>layers, 21 blend modes</span></div>
+  <div><b>6</b><span>engine export presets</span></div>
+  <div><b>8129</b><span>max heightmap px</span></div>
+</section>
+
+<div class="wrap">
+
+<section class="split">
+  <div class="split-text">
+    <h2>A node graph built for terrain</h2>
+    <p class="lead">Every element of the landscape is a node. Chain them, adjust them with live sliders, watch the result update. Nothing is destructive — change any step at any time without starting over.</p>
+    <ul class="ticks"><li><strong>Generators</strong> — Perlin, Simplex, Voronoi and Gradient noise, plus Island Cluster for archipelagos and Mountain Ridge for ranges you draw yourself</li><li><strong>Hydraulic and thermal erosion</strong> — water and slope-driven wear, for terrain that looks like it got that way for a reason</li><li><strong>Masks from the terrain itself</strong> — shoreline, slope, curvature and height selection, so material masks come out of the landscape rather than being painted on</li><li><strong>A full maths and filter library</strong> — Warp, Terrace, Smooth, Sharpen, Remap, Clamp, Power, Invert, Mix and more</li></ul>
+  </div>
+  <figure class="shot"><img src="img/graph.png" alt="The Strata node graph with noise, mix and terrace nodes wired to a height output" loading="lazy"><figcaption>A graph that mixes two noise generators, terraces the result and sends it to the height output.</figcaption></figure>
+</section>
+
+<section class="split flip">
+  <div class="split-text">
+    <h2>Rivers you draw, roads that obey a grade</h2>
+    <p class="lead">Draw a route over the preview and get a channel with banks, meander and tributaries — plus a water mask for your material stack. The Road / Path node works the same way, cutting into hills and filling across dips so the surface never exceeds the grade you set.</p>
+    <ul class="ticks"><li><strong>River</strong> — width, depth and bank in metres; tributaries with their own reach</li><li><strong>Road / Path</strong> — width and shoulder in metres, maximum grade in percent, with road and shoulder masks</li><li><strong>Flatten Pin</strong> — a level building pad anywhere on the map, placeable while you walk</li></ul>
+  </div>
+  <figure class="shot"><img src="img/river.png" alt="The River node selected, its spline drawn over the 2D preview, inspector open" loading="lazy"><figcaption>River: spline points on the 2D preview, parameters in metres on the right.</figcaption></figure>
+</section>
+
+<section class="split">
+  <div class="split-text">
+    <h2>Photoshop&#x27;s compositing model, rethought for heightfields</h2>
+    <p class="lead">Layer Stack composites up to 12 layers with 21 blend modes, per-layer opacity, masks and visibility — so landforms stack the way image layers do, with the mask deciding where each one lands.</p>
+    
+  </div>
+  <figure class="shot"><img src="img/layers.png" alt="The Layer Stack node showing blend modes and per-layer controls" loading="lazy"><figcaption>Layer Stack with per-layer blend mode, amount and mask controls.</figcaption></figure>
+</section>
+
+<section class="split flip">
+  <div class="split-text">
+    <h2>Look at it from the ground</h2>
+    <p class="lead">Orbit it, or drop down and walk. The walk and follow cameras put you at eye level with the terrain you are building, because &quot;is this hill the right size?&quot; is a question best answered standing at the bottom of it.</p>
+    <ul class="ticks"><li>The 3D viewport textures from the same splat channels your engine will get — grass, rock, dirt, snow and riverbed — and renders water at the level the graph sets. The preview is the export, not an impression of it.</li></ul>
+  </div>
+  <figure class="shot"><img src="img/walk-river.png" alt="Ground-level view of a riverbed with gravel and rock, walking HUD visible" loading="lazy"><figcaption>Walk mode at 4 km scale. The minimap tracks where you are on the heightmap.</figcaption></figure>
+</section>
+
+<section class="split">
+  <div class="split-text">
+    <h2>Learn it while you build</h2>
+    <p class="lead">Thirty-odd nodes is a lot to face on an empty graph, so Strata ships two guides, both reachable from the Help menu at any time. Neither blocks anything — the application stays fully usable underneath.</p>
+    <ul class="ticks"><li><strong>A guided start</strong>, which reads your graph and advances when you have actually done the step rather than when you click Next</li><li><strong>A node reference</strong>, one entry per node, with an explanation and a practical note — the same text is <a href="nodes.html">on this site</a></li></ul>
+  </div>
+  <figure class="shot"><img src="img/guided.png" alt="The guided start panel open beside the node graph" loading="lazy"><figcaption>The guided start reads the graph and moves on when the step is actually done.</figcaption></figure>
+</section>
+</div>
+
+
+<section class="band" id="export">
+  <div class="wrap narrow">
+    <h2>Export for your engine</h2>
+    <p class="lead">Strata writes the formats and resolutions your engine actually expects —
+    not a generic image you have to convert.</p>
+    <table class="data">
+      <thead><tr><th scope="col">Engine</th><th scope="col">Resolutions</th><th scope="col">Format</th></tr></thead>
+      <tbody><tr><th scope="row">Unreal Engine 5</th><td>127 – 8129</td><td>16-bit R16 raw</td></tr><tr><th scope="row">Unity</th><td>33 – 4097</td><td>16-bit R16 raw</td></tr><tr><th scope="row">Leadwerks 5</th><td>128 – 8192</td><td>16-bit R16 raw</td></tr><tr><th scope="row">Godot</th><td>64 – 4096</td><td>16-bit PNG</td></tr><tr><th scope="row">O3DE</th><td>512 – 8192</td><td>16-bit PNG</td></tr><tr><th scope="row">Generic PNG</th><td>256 – 4096</td><td>16-bit PNG</td></tr></tbody>
+    </table>
+    <p class="note">Export a single map or a 3 × 3 tile grid — each tile is evaluated in its own
+    world coordinates, so the seams line up. Splat masks are written alongside the heightmap
+    as RGBA PNG. Projects are plain JSON: diffable, readable, and portable.</p>
+  </div>
+</section>
+
+<section class="wrap narrow" id="units">
+  <h2>Real units, chosen detail</h2>
+  <p class="lead">Preview sampling is independent of physical size. Pick Draft (512), Balanced
+  (1024) or Fine (2048); the editor tells you the real sample spacing in metres and the memory
+  cost before you commit.</p>
+  <p>Terrain is authored in units that mean something — map width in kilometres, height range in
+  metres, river widths in metres, road grades in percent. The landscape comes out the size you meant.</p>
+</section>
+
+<section class="band" id="honest">
+  <div class="wrap narrow">
+    <h2>What it does not do yet</h2>
+    <p class="lead">Worth knowing before you buy rather than after.</p>
+    <ul class="plain"><li><strong>Evaluation can briefly pause the interface</strong> on a complex rebuild at Fine detail. Moving it off-thread is next.</li><li><strong>Higher preview detail does not resolve small features at large scale</strong> — a 64 km world at 2048 samples still has ~31 m between samples. The editor tells you the spacing rather than letting you guess.</li><li><strong>The Road tool shapes terrain</strong>. It does not generate road meshes, bridges or tunnels.</li><li><strong>Rivers can still disagree across a tiled export</strong>. The equivalent problem in Road is fixed; River is known and not yet done.</li><li><strong>The interface is English only</strong>.</li></ul>
+    <p class="note">The full roadmap, including what is being worked on now, is public:
+    <a href="https://github.com/Orindoomhammer/strata-roadmap" rel="noopener">github.com/Orindoomhammer/strata-roadmap</a>.</p>
+  </div>
+</section>
+
+<section class="wrap narrow" id="requirements">
+  <h2>Requirements</h2>
+  <p class="lead">Terrain is evaluated with GPU compute shaders, so a Vulkan or DX12 capable GPU is
+  required — roughly NVIDIA GTX 600, AMD HD 7000 or Intel HD 520 and newer.</p>
+  <div class="scroll">
+  <table class="data">
+    <thead><tr><th scope="col">Minimum</th><th scope="col">OS</th><th scope="col">Processor</th>
+    <th scope="col">Memory</th><th scope="col">Graphics</th><th scope="col">Storage</th></tr></thead>
+    <tbody><tr><th scope="row">Windows</th><td>Windows 10 64-bit</td><td>Intel Core i5-4000 / AMD equivalent</td><td>4 GB</td><td>DirectX 12 or Vulkan GPU, 2 GB VRAM</td><td>150 MB</td></tr><tr><th scope="row">Linux</th><td>Ubuntu 22.04 / SteamOS 3 or newer</td><td>Intel Core i5-4000 / AMD equivalent</td><td>4 GB</td><td>Vulkan GPU, 2 GB VRAM</td><td>150 MB</td></tr></tbody>
+  </table>
+  </div>
+  <p class="note">Recommended for either: a GTX 1060 / RX 580 or better with 4 GB VRAM, and 8 GB RAM.
+  The Linux build is native — Proton is not required, and it runs on Steam Deck.</p>
+</section>
+
+<section class="closer">
+  <div class="wrap narrow">
+    <h2>Build the landscape you meant.</h2>
+    <p class="cta">
+      <a class="btn" href="https://orindoomhammer.itch.io/strata" rel="noopener">Buy on itch.io</a>
+      <a class="btn ghost" href="https://store.steampowered.com/app/4865260/" rel="noopener">Try the free demo</a>
+    </p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap footgrid">
+    <div>
+      <p class="brand small"><span class="chev"></span>STRATA</p>
+      <p class="dim">Node-based terrain editor for game developers.<br>
+      Version 0.3.1. Windows and Linux, native.</p>
+    </div>
+    <div>
+      <h4>Get it</h4>
+      <p><a href="https://orindoomhammer.itch.io/strata" rel="noopener">itch.io</a></p>
+      <p><a href="https://store.steampowered.com/app/4791200/" rel="noopener">Steam</a></p>
+      <p><a href="https://store.steampowered.com/app/4865260/" rel="noopener">Free demo</a></p>
+    </div>
+    <div>
+      <h4>More</h4>
+      <p><a href="nodes.html">Node reference</a></p>
+      <p><a href="changelog.html">Changelog</a></p>
+      <p><a href="https://github.com/Orindoomhammer/strata-roadmap" rel="noopener">Public roadmap</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Node reference — Strata</title>
+<meta name="description" content="Every one of Strata&#x27;s 39 nodes: what it does, its pins, and every parameter with its default and range.">
+<meta property="og:title" content="Node reference — Strata">
+<meta property="og:description" content="Every one of Strata&#x27;s 39 nodes: what it does, its pins, and every parameter with its default and range.">
+<meta property="og:image" content="img/keyart.jpg">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="index.html"><span class="chev"></span>STRATA</a>
+    <nav><a href="index.html">Overview</a><a href="nodes.html" class=on>Node reference</a><a href="changelog.html">Changelog</a></nav>
+    <a class="btn small" href="https://orindoomhammer.itch.io/strata" rel="noopener">Get it</a>
+  </div>
+</header>
+
+<section class="pagehead">
+  <div class="wrap narrow">
+    <h1>Node reference</h1>
+    <p class="lead">All 39 nodes — what each one does, its pins, and every parameter with
+    its default and range. This is the same reference that ships in the application under
+    <em>Help</em>, generated from the source of version 0.3.1, so it cannot drift from the build.</p>
+  </div>
+</section>
+<div class="wrap">
+  <div class="filters">
+    <label class="srch"><span class="vh">Search nodes</span>
+      <input id="q" type="search" placeholder="Search nodes, parameters…" autocomplete="off"></label>
+    <div class="chips"><button class="chip" data-cat="All" aria-pressed="true">All</button><button class="chip" data-cat="Generators" aria-pressed="false">Generators</button><button class="chip" data-cat="Filters" aria-pressed="false">Filters</button><button class="chip" data-cat="Analysis" aria-pressed="false">Analysis</button><button class="chip" data-cat="Composite" aria-pressed="false">Composite</button><button class="chip" data-cat="Math" aria-pressed="false">Math</button><button class="chip" data-cat="Values" aria-pressed="false">Values</button><button class="chip" data-cat="Output" aria-pressed="false">Output</button></div>
+    <p id="count" class="dim small" aria-live="polite"></p>
+  </div>
+  <div class="nodegrid"><section class="catgroup"><h2 class="cathead">Generators</h2>
+<article class="node" id="PerlinNoise" data-cat="Generators" data-name="perlin noise perlinnoise">
+  <div class="node-head">
+    <h3>Perlin Noise</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">PerlinNoise</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>The workhorse. Smooth, natural-looking hills.</p>
+<p>Scale sets feature size - smaller means bigger landforms. Octaves layers finer detail on top; 6-8 gives rugged terrain, 2-3 gives rolling hills. Persistence controls how much each octave contributes.</p><p class="tip">Start here, then shape it with filters.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Scale</th><td><code>scale</code></td><td>0.25</td><td>0.01 – 10.0</td></tr><tr><th scope="row">Octaves</th><td><code>octaves</code></td><td>4</td><td>1.0 – 8.0</td></tr><tr><th scope="row">Persistence</th><td><code>persistence</code></td><td>0.5</td><td>0.01 – 1.0</td></tr><tr><th scope="row">Lacunarity</th><td><code>lacunarity</code></td><td>2.0</td><td>1.0 – 4.0</td></tr><tr><th scope="row">Seed</th><td><code>seed</code></td><td>42</td><td>0.0 – 9999.0</td></tr><tr><th scope="row">Offset X</th><td><code>offsetX</code></td><td>0.0</td><td>-100.0 – 100.0</td></tr><tr><th scope="row">Offset Y</th><td><code>offsetY</code></td><td>0.0</td><td>-100.0 – 100.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="SimplexNoise" data-cat="Generators" data-name="simplex noise simplexnoise">
+  <div class="node-head">
+    <h3>Simplex Noise</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">SimplexNoise</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Like Perlin but with a different grain - fewer axis-aligned artefacts and a slightly more organic feel.</p>
+<p>Use it when Perlin looks too regular, or mix both for variety.</p><p class="tip">Same settings as Perlin.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Scale</th><td><code>scale</code></td><td>0.25</td><td>0.01 – 10.0</td></tr><tr><th scope="row">Octaves</th><td><code>octaves</code></td><td>5</td><td>1.0 – 8.0</td></tr><tr><th scope="row">Persistence</th><td><code>persistence</code></td><td>0.5</td><td>0.01 – 1.0</td></tr><tr><th scope="row">Lacunarity</th><td><code>lacunarity</code></td><td>2.0</td><td>1.0 – 4.0</td></tr><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Voronoi" data-cat="Generators" data-name="voronoi voronoi">
+  <div class="node-head">
+    <h3>Voronoi</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">Voronoi</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Cell-based patterns. F1 mode gives rounded blobs; F2 and F2-F1 give ridged cell walls that read as cracked rock or mountain ranges.</p>
+<p>Powerful mixed at low opacity under noise.</p><p class="tip">Try F2-F1 through a Layer Stack.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Scale</th><td><code>scale</code></td><td>0.17</td><td>0.01 – 10.0</td></tr><tr><th scope="row">Mode</th><td><code>mode</code></td><td>f1</td><td>f1, f2, f2-f1</td></tr><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Gradient" data-cat="Generators" data-name="gradient gradient">
+  <div class="node-head">
+    <h3>Gradient</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">Gradient</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>A smooth ramp across the map - linear, radial, cone, rim or diamond.</p>
+<p>Mostly used as a mask or a multiplier: a radial gradient multiplied into noise makes an island; a linear one makes terrain fall away toward one edge.</p><p class="tip">Falloff bends the curve; angle rotates the linear type.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Type</th><td><code>type</code></td><td>radial</td><td>linear, radial, cone, rim, diamond</td></tr><tr><th scope="row">Falloff</th><td><code>falloff</code></td><td>1.0</td><td>0.1 – 4.0</td></tr><tr><th scope="row">Direction (°)</th><td><code>angle</code></td><td>0.0</td><td>0.0 – 360.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="MaskShape" data-cat="Generators" data-name="mask shape maskshape">
+  <div class="node-head">
+    <h3>Mask Shape</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">MaskShape</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin mask">Mask</span></div>
+  <div class="node-body"><p>A circle, rectangle, ellipse, ring or diamond you can place and feather.</p>
+<p>Use it to confine an effect to one region, or as a splat layer for a deliberately shaped zone.</p><p class="tip">Feather softens the edge.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Shape</th><td><code>shape</code></td><td>circle</td><td>circle, rectangle, ellipse, ring, diamond</td></tr><tr><th scope="row">Center X</th><td><code>centerX</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Center Y</th><td><code>centerY</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Size</th><td><code>size</code></td><td>0.4</td><td>0.01 – 1.0</td></tr><tr><th scope="row">Feather</th><td><code>feather</code></td><td>0.15</td><td>0.0 – 0.5</td></tr></tbody></table></div>
+</article>
+<article class="node" id="ImportHeightmap" data-cat="Generators" data-name="import heightmap importheightmap">
+  <div class="node-head">
+    <h3>Import Heightmap</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">ImportHeightmap</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Loads a PNG from disk as terrain - 8-bit or 16-bit greyscale.</p>
+<p>Use it to bring in real-world elevation data, something authored elsewhere, or a previous Strata export you want to build on.</p><p class="tip">Select the node and press Load. It resamples to whatever resolution you export at.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">File</th><td><code>fileName</code></td><td></td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="MountainRidge" data-cat="Generators" data-name="mountain ridge mountainridge">
+  <div class="node-head">
+    <h3>Mountain Ridge</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">MountainRidge</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>A mountain range you draw by hand. Select it and control points appear over the 2D preview - drag them to route the range.</p>
+<p>Width sets how broad the massif is, Elevation how tall, Roughness how much the peaks vary along its length.</p><p class="tip">Shore adds a foothill shelf around the base.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr><tr><th scope="row">Elevation</th><td><code>elevation</code></td><td>0.45</td><td>0.05 – 1.0</td></tr><tr><th scope="row">Width</th><td><code>splineScale</code></td><td>0.35</td><td>0.02 – 0.6</td></tr><tr><th scope="row">Roughness</th><td><code>roughness</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Shore</th><td><code>shore</code></td><td>0.0</td><td>0.0 – 0.4</td></tr></tbody></table></div>
+</article>
+<article class="node" id="IslandCluster" data-cat="Generators" data-name="island cluster islandcluster">
+  <div class="node-head">
+    <h3>Island Cluster</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">IslandCluster</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Scatters islands with coastlines that are warped rather than circular.</p>
+<p>Count and Scatter control how many and how spread. Flatness decides between rounded domes and flat-topped atolls. Roughness adds surface detail.</p><p class="tip">Size is relative to the map, so small values give archipelagos.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Count</th><td><code>count</code></td><td>5</td><td>1.0 – 30.0</td></tr><tr><th scope="row">Size</th><td><code>size</code></td><td>0.06</td><td>0.01 – 0.25</td></tr><tr><th scope="row">Scatter</th><td><code>scatter</code></td><td>0.8</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Elevation</th><td><code>elevation</code></td><td>0.8</td><td>0.05 – 1.0</td></tr><tr><th scope="row">Flatness</th><td><code>flatness</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Roughness</th><td><code>roughness</code></td><td>0.4</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Constant" data-cat="Generators" data-name="constant constant">
+  <div class="node-head">
+    <h3>Constant</h3>
+    <span class="tag">Generators</span>
+    
+    <code class="nid">Constant</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span><span class="pin scalar">Scalar</span></div>
+  <div class="node-body"><p>A flat value everywhere. Useful as a baseline to add to, a floor to clamp against, or a fixed input to a Mix.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Value</th><td><code>value</code></td><td>0.5</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article></section><section class="catgroup"><h2 class="cathead">Filters</h2>
+<article class="node" id="Terrace" data-cat="Filters" data-name="terrace terrace">
+  <div class="node-head">
+    <h3>Terrace</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Terrace</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Cuts terrain into stepped plateaus, like sedimentary layers or rice paddies.</p>
+<p>Steps sets how many; Smooth rounds the step edges.</p><p class="tip">A little goes a long way - try 4-8 steps.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Steps</th><td><code>steps</code></td><td>8</td><td>2.0 – 32.0</td></tr><tr><th scope="row">Smooth</th><td><code>smooth</code></td><td>0.3</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Smooth" data-cat="Filters" data-name="smooth smooth">
+  <div class="node-head">
+    <h3>Smooth</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Smooth</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Blurs the terrain. Removes noise, softens harsh transitions, and is often the fix when erosion output looks too crunchy.</p><p class="tip">Radius is in pixels.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Radius</th><td><code>radius</code></td><td>2</td><td>1.0 – 12.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Sharpen" data-cat="Filters" data-name="sharpen sharpen">
+  <div class="node-head">
+    <h3>Sharpen</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Sharpen</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>The opposite - exaggerates local contrast to make ridges crisper.</p>
+<p>Push it too far and you get ringing artefacts.</p><p class="tip">Best in small amounts.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Strength</th><td><code>strength</code></td><td>0.5</td><td>0.0 – 2.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Warp" data-cat="Filters" data-name="warp warp">
+  <div class="node-head">
+    <h3>Warp</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Warp</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Input</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Displaces the terrain by noise, so straight features bend and curl.</p>
+<p>This is the single best cure for terrain that looks procedurally regular.</p><p class="tip">Strength controls distortion; scale controls the size of the swirls.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Strength</th><td><code>strength</code></td><td>0.08</td><td>0.0 – 0.5</td></tr><tr><th scope="row">Scale</th><td><code>scale</code></td><td>2.0</td><td>0.1 – 8.0</td></tr><tr><th scope="row">Octaves</th><td><code>octaves</code></td><td>3</td><td>1.0 – 6.0</td></tr><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="HydraulicErosion" data-cat="Filters" data-name="hydraulic erosion hydraulicerosion">
+  <div class="node-head">
+    <h3>Hydraulic Erosion</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">HydraulicErosion</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Runs water droplets across the terrain, picking up sediment on steep ground and dropping it on flat ground.</p>
+<p>Carves branching valleys and alluvial fans. The most realistic single thing you can do to a heightmap.</p><p class="tip">Droplets is the quality dial. This one runs on the CPU, so it is the slowest node.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Droplets</th><td><code>droplets</code></td><td>6000</td><td>500.0 – 60000.0</td></tr><tr><th scope="row">Erosion</th><td><code>erosion</code></td><td>0.3</td><td>0.01 – 1.0</td></tr><tr><th scope="row">Deposition</th><td><code>deposition</code></td><td>0.3</td><td>0.01 – 1.0</td></tr><tr><th scope="row">Evaporation</th><td><code>evaporation</code></td><td>0.05</td><td>0.001 – 0.5</td></tr><tr><th scope="row">Inertia</th><td><code>inertia</code></td><td>0.3</td><td>0.0 – 0.99</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Erosion" data-cat="Filters" data-name="thermal erosion erosion">
+  <div class="node-head">
+    <h3>Thermal Erosion</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Erosion</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Simulates material sliding down slopes that exceed their angle of repose, piling up as scree at the bottom.</p>
+<p>Softens peaks and builds talus - the geological look of old, weathered rock.</p><p class="tip">Iterations costs time; 3-6 is usually enough.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Iterations</th><td><code>iterations</code></td><td>3</td><td>1.0 – 20.0</td></tr><tr><th scope="row">Strength</th><td><code>strength</code></td><td>0.4</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="FlattenPin" data-cat="Filters" data-name="flatten pin flattenpin">
+  <div class="node-head">
+    <h3>Flatten Pin</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">FlattenPin</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Terrain</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span><span class="pin mask">Pad mask</span></div>
+  <div class="node-body"><p>Levels a circular area so you have somewhere to build - a town, an airfield, a fortress.</p>
+<p>Select it and drag the orange pin over the 2D preview to site it. Radius is in metres, so 90 m radius is a 180 m pad. Feather sets how much of that is a graded slope versus dead flat.</p><p class="tip">Its second output is a mask of the pad - wire that to a splat layer.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Pin X</th><td><code>pinX</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Pin Y</th><td><code>pinY</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Radius (m)</th><td><code>radius</code></td><td>90.0</td><td>5.0 – 2000.0</td></tr><tr><th scope="row">Strength</th><td><code>strength</code></td><td>1.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Feather</th><td><code>feather</code></td><td>0.45</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="River" data-cat="Filters" data-name="river river">
+  <div class="node-head">
+    <h3>River</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">River</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Terrain</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span><span class="pin mask">Water mask</span></div>
+  <div class="node-body"><p>Cuts a river channel you route by hand. Select it and drag the blue control points over the 2D preview.</p>
+<p>The spline sets direction; Meander controls how far it wanders either side of that line. Depth and Width are in metres, and the bed follows the land rather than cutting to zero.</p><p class="tip">Its Water mask output is how the riverbed gets a material in your splat map.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Seed</th><td><code>seed</code></td><td>0</td><td>0.0 – 9999.0</td></tr><tr><th scope="row">Depth (m)</th><td><code>depth</code></td><td>4.0</td><td>0.5 – 40.0</td></tr><tr><th scope="row">Width (m)</th><td><code>splineScale</code></td><td>18.0</td><td>2.0 – 250.0</td></tr><tr><th scope="row">Meander (m)</th><td><code>snake</code></td><td>60.0</td><td>0.0 – 600.0</td></tr><tr><th scope="row">Meanders</th><td><code>snakeFreq</code></td><td>3.0</td><td>0.3 – 14.0</td></tr><tr><th scope="row">Bank (m)</th><td><code>shore</code></td><td>12.0</td><td>0.0 – 150.0</td></tr><tr><th scope="row">Tributaries</th><td><code>tributaries</code></td><td>0</td><td>0.0 – 6.0</td></tr><tr><th scope="row">Trib. reach</th><td><code>tribReach</code></td><td>0.25</td><td>0.05 – 0.8</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Road" data-cat="Filters" data-name="road / path road">
+  <div class="node-head">
+    <h3>Road / Path</h3>
+    <span class="tag">Filters</span>
+    
+    <code class="nid">Road</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Terrain</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span><span class="pin mask">Road mask</span><span class="pin mask">Shoulder mask</span></div>
+  <div class="node-body"><p>Draw a route over the 2D preview and get a grade-limited carriageway. It cuts into hills and fills across dips so the finished surface never exceeds the maximum grade you set.</p>
+<p>Width and shoulder are authored in metres, grade in percent. Alongside the terrain it outputs a road mask and a shoulder mask for your material stack.</p>
+<p>It shapes terrain only — it does not generate road meshes, bridges or tunnels.</p><p class="tip">The elevation profile is solved once over the whole route, so a tiled export resolves the same surface on both sides of a seam.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Width (m)</th><td><code>width</code></td><td>7.0</td><td>1.0 – 60.0</td></tr><tr><th scope="row">Shoulder (m)</th><td><code>shoulder</code></td><td>8.0</td><td>0.0 – 120.0</td></tr><tr><th scope="row">Max grade (%)</th><td><code>maxGrade</code></td><td>8.0</td><td>1.0 – 30.0</td></tr><tr><th scope="row">Grade smoothing</th><td><code>smooth</code></td><td>0.5</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Strength</th><td><code>strength</code></td><td>1.0</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article></section><section class="catgroup"><h2 class="cathead">Analysis</h2>
+<article class="node" id="HeightSelect" data-cat="Analysis" data-name="height select heightselect">
+  <div class="node-head">
+    <h3>Height Select</h3>
+    <span class="tag">Analysis</span>
+    
+    <code class="nid">HeightSelect</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin mask">Mask</span></div>
+  <div class="node-body"><p>Outputs a mask covering a band of elevations. The classic snowline: select everything above a height and feed it to a splat layer.</p><p class="tip">Blend softens the band edges.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Min Height</th><td><code>min</code></td><td>0.3</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Max Height</th><td><code>max</code></td><td>0.6</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Blend Width</th><td><code>blend</code></td><td>0.1</td><td>0.0 – 0.5</td></tr></tbody></table></div>
+</article>
+<article class="node" id="SlopeSelect" data-cat="Analysis" data-name="slope select slopeselect">
+  <div class="node-head">
+    <h3>Slope Select</h3>
+    <span class="tag">Analysis</span>
+    
+    <code class="nid">SlopeSelect</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Slope</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin mask">Mask</span></div>
+  <div class="node-body"><p>A mask for a range of steepness. Cliffs are steep, meadows are not - this is how rock gets onto cliff faces and grass onto flats.</p><p class="tip">Pair with Height Select through Multiply for &#x27;steep AND high&#x27;.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Min Slope</th><td><code>min</code></td><td>0.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Max Slope</th><td><code>max</code></td><td>0.4</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Blend Width</th><td><code>blend</code></td><td>0.1</td><td>0.0 – 0.5</td></tr></tbody></table></div>
+</article>
+<article class="node" id="ShorelineMask" data-cat="Analysis" data-name="shoreline mask shorelinemask">
+  <div class="node-head">
+    <h3>Shoreline Mask</h3>
+    <span class="tag">Analysis</span>
+    
+    <code class="nid">ShorelineMask</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin mask">Mask</span></div>
+  <div class="node-body"><p>A band hugging a chosen water level - beach above, shallows below.</p>
+<p>Feeds sand into a splat layer exactly where land meets water.</p><p class="tip">Falloff widens the fade.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Water Level</th><td><code>waterLevel</code></td><td>0.3</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Beach Width</th><td><code>beachWidth</code></td><td>0.05</td><td>0.005 – 0.2</td></tr><tr><th scope="row">Shallow Width</th><td><code>shallowWidth</code></td><td>0.02</td><td>0.005 – 0.1</td></tr><tr><th scope="row">Falloff</th><td><code>falloff</code></td><td>0.5</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Slope" data-cat="Analysis" data-name="slope slope">
+  <div class="node-head">
+    <h3>Slope</h3>
+    <span class="tag">Analysis</span>
+    
+    <code class="nid">Slope</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Slope</span></div>
+  <div class="node-body"><p>Converts terrain into steepness, 0 flat to 1 vertical. Useful directly as a rock mask or as input to Slope Select.</p><p class="tip">Strength scales the response.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Strength</th><td><code>strength</code></td><td>4.0</td><td>0.1 – 20.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Curvature" data-cat="Analysis" data-name="curvature curvature">
+  <div class="node-head">
+    <h3>Curvature</h3>
+    <span class="tag">Analysis</span>
+    
+    <code class="nid">Curvature</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Curvature</span></div>
+  <div class="node-body"><p>Finds where terrain bends - ridges read bright, gullies dark.</p>
+<p>Good for picking out erosion channels, or scattering debris into hollows.</p><p class="tip">Subtle by nature; raise strength to see it.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Strength</th><td><code>strength</code></td><td>8.0</td><td>0.1 – 50.0</td></tr></tbody></table></div>
+</article></section><section class="catgroup"><h2 class="cathead">Composite</h2>
+<article class="node" id="Layer" data-cat="Composite" data-name="layer stack layer">
+  <div class="node-head">
+    <h3>Layer Stack</h3>
+    <span class="tag">Composite</span>
+    
+    <code class="nid">Layer</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Base</span><span class="pin height">Layer 1 – 12</span><span class="pin mask">Mask 1 – 12</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Photoshop-style layering for terrain. A base plus three layers, each with a blend mode, opacity, an optional mask and an enable toggle.</p>
+<p>19 blend modes. Multiply and Darken cut terrain away, Screen and Lighten build it up, Overlay and Soft Light add contrast without flattening.</p><p class="tip">Wire a mask into a layer and it only applies where the mask is bright.</p></div>
+  <p class="note">Five controls per layer — blend mode, amount, "only where layer has height" and "invert mask" — for up to 12 layers (a new stack starts with 2).<br><strong>Blend modes:</strong> normal, multiply, screen, overlay, soft-light, hard-light, add, subtract, difference, darken, lighten, linear-burn, color-dodge, color-burn, vivid-light, linear-light, pin-light, exclusion, average, max, min.<br><span class="dim">21 entries in the menu; <code>max</code> and <code>min</code> are terrain-friendly names for <code>lighten</code> and <code>darken</code>, so there are 19 distinct operations.</span></p>
+</article></section><section class="catgroup"><h2 class="cathead">Math</h2>
+<article class="node" id="Add" data-cat="Math" data-name="add add">
+  <div class="node-head">
+    <h3>Add</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Add</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span><span class="pin height">B</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Sums two terrains. The standard way to layer detail noise onto base landforms.</p>
+<p>Watch for clipping - two bright inputs will saturate. Scale one down first.</p><p class="tip">A + B</p></div>
+  
+</article>
+<article class="node" id="Subtract" data-cat="Math" data-name="subtract subtract">
+  <div class="node-head">
+    <h3>Subtract</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Subtract</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span><span class="pin height">B</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Takes B away from A. Carves one shape out of another.</p><p class="tip">A - B</p></div>
+  
+</article>
+<article class="node" id="Multiply" data-cat="Math" data-name="multiply multiply">
+  <div class="node-head">
+    <h3>Multiply</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Multiply</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span><span class="pin height">B</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Multiplies two terrains. Because anything times zero is zero, this is the main masking tool: multiply terrain by a gradient and it fades away where the gradient is dark.</p><p class="tip">A x B</p></div>
+  
+</article>
+<article class="node" id="Mix" data-cat="Math" data-name="mix mix">
+  <div class="node-head">
+    <h3>Mix</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Mix</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span><span class="pin height">B</span><span class="pin height">Factor</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Blends between A and B by a factor. 0 is all A, 1 is all B.</p>
+<p>Gentler than Add when you want two terrains to coexist rather than stack.</p><p class="tip">For per-pixel control use the Layer Stack with a mask instead.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Factor (no input)</th><td><code>factor</code></td><td>0.5</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Clamp" data-cat="Math" data-name="clamp clamp">
+  <div class="node-head">
+    <h3>Clamp</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Clamp</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Squashes everything below Min up and above Max down. Use it to put a floor under a terrain or cap its peaks.</p><p class="tip">Flat regions mean you clamped too hard.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Min</th><td><code>min</code></td><td>0.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Max</th><td><code>max</code></td><td>1.0</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Power" data-cat="Math" data-name="power power">
+  <div class="node-head">
+    <h3>Power</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Power</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Raises the height to an exponent. Above 1 pushes mid-tones down and sharpens peaks; below 1 lifts valleys and flattens tops.</p><p class="tip">A cheap way to make terrain more or less dramatic.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Exponent</th><td><code>exp</code></td><td>2.0</td><td>0.1 – 10.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Invert" data-cat="Math" data-name="invert invert">
+  <div class="node-head">
+    <h3>Invert</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Invert</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Flips high and low. Peaks become basins.</p><p class="tip">1 - A</p></div>
+  
+</article>
+<article class="node" id="Abs" data-cat="Math" data-name="abs abs">
+  <div class="node-head">
+    <h3>Abs</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Abs</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Folds negative values positive. On signed data this creates sharp creases where it crosses zero - a quick way to get ridgelines.</p><p class="tip">|A|</p></div>
+  
+</article>
+<article class="node" id="ScaleOffset" data-cat="Math" data-name="scale / offset scaleoffset">
+  <div class="node-head">
+    <h3>Scale / Offset</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">ScaleOffset</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Multiplies then adds. The usual way to fit a terrain into a height band before combining it with something else.</p><p class="tip">A x scale + offset</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Scale</th><td><code>scale</code></td><td>1.0</td><td>-4.0 – 4.0</td></tr><tr><th scope="row">Offset</th><td><code>offset</code></td><td>0.0</td><td>-1.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="Remap" data-cat="Math" data-name="remap remap">
+  <div class="node-head">
+    <h3>Remap</h3>
+    <span class="tag">Math</span>
+    
+    <code class="nid">Remap</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">A</span></div><div class="pins"><span class="pinlab">Out</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>Maps an input range onto an output range. More explicit than Scale/Offset when you know the numbers you want.</p><p class="tip">In 0..1 -&gt; Out 0.2..0.6 compresses into a band.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">In Min</th><td><code>inMin</code></td><td>0.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">In Max</th><td><code>inMax</code></td><td>1.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Out Min</th><td><code>outMin</code></td><td>0.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">Out Max</th><td><code>outMax</code></td><td>1.0</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article></section><section class="catgroup"><h2 class="cathead">Values</h2>
+<article class="node" id="FloatValue" data-cat="Values" data-name="float value floatvalue">
+  <div class="node-head">
+    <h3>Float Value</h3>
+    <span class="tag">Values</span>
+    
+    <code class="nid">FloatValue</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin scalar">Scalar</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>A single decimal number fed into math nodes - handy when you want one value driving several places at once.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Value</th><td><code>value</code></td><td>0.5</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article>
+<article class="node" id="IntValue" data-cat="Values" data-name="int value intvalue">
+  <div class="node-head">
+    <h3>Int Value</h3>
+    <span class="tag">Values</span>
+    
+    <code class="nid">IntValue</code>
+  </div>
+  <div class="pins"><span class="pinlab">Out</span><span class="pin scalar">Scalar</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>A whole number, for settings that count things.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Value</th><td><code>value</code></td><td>50</td><td>0.0 – 100.0</td></tr></tbody></table></div>
+</article></section><section class="catgroup"><h2 class="cathead">Output</h2>
+<article class="node" id="HeightOutput" data-cat="Output" data-name="height output heightoutput">
+  <div class="node-head">
+    <h3>Height Output</h3>
+    <span class="tag">Output</span>
+    <span class="tag term">terminal</span>
+    <code class="nid">HeightOutput</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin height">Height</span></div>
+  <div class="node-body"><p>The terrain itself. Whatever reaches this node is what exports.</p>
+<p>Every graph needs exactly one. If the preview is blank, this is usually what to check first.</p></div>
+  
+</article>
+<article class="node" id="SplatOutput" data-cat="Output" data-name="splat output splatoutput">
+  <div class="node-head">
+    <h3>Splat Output</h3>
+    <span class="tag">Output</span>
+    <span class="tag term">terminal</span>
+    <code class="nid">SplatOutput</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin mask">Layer R</span><span class="pin mask">Layer G</span><span class="pin mask">Layer B</span><span class="pin mask">Layer A</span></div>
+  <div class="node-body"><p>Four texture layers your engine blends across the terrain - typically grass, rock, sand and snow.</p>
+<p>Feed each input a mask: a 0-1 image saying where that material belongs. Analysis nodes and the mask outputs on River and Flatten Pin are what you wire here.</p><p class="tip">Exports as an RGBA PNG next to the heightmap.</p></div>
+  
+</article>
+<article class="node" id="WaterOutput" data-cat="Output" data-name="water output wateroutput">
+  <div class="node-head">
+    <h3>Water Output</h3>
+    <span class="tag">Output</span>
+    <span class="tag term">terminal</span>
+    <code class="nid">WaterOutput</code>
+  </div>
+  <div class="pins"><span class="pinlab">In</span><span class="pin mask">Water</span></div>
+  <div class="node-body"><p>Terminal, like Height Output and Splat Output: it marks which mask in the graph is standing water, so the 3D viewport can put a surface on it and an export can hand your engine a water map.</p>
+<p>Sea level lives here rather than in the view settings, because it is part of the terrain rather than a display preference.</p><p class="tip">Wire a water mask here — the River node&#x27;s mask output is the usual source.</p></div>
+  <div class="scroll"><table class="data params"><thead><tr><th scope="col">Parameter</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">fill (m)</th><td><code>fill</code></td><td>4.0</td><td>0.0 – 60.0</td></tr><tr><th scope="row">sea level</th><td><code>sea</code></td><td>0.0</td><td>0.0 – 1.0</td></tr><tr><th scope="row">murkiness</th><td><code>murk</code></td><td>0.5</td><td>0.0 – 1.0</td></tr></tbody></table></div>
+</article></section></div>
+</div>
+
+<footer class="foot">
+  <div class="wrap footgrid">
+    <div>
+      <p class="brand small"><span class="chev"></span>STRATA</p>
+      <p class="dim">Node-based terrain editor for game developers.<br>
+      Version 0.3.1. Windows and Linux, native.</p>
+    </div>
+    <div>
+      <h4>Get it</h4>
+      <p><a href="https://orindoomhammer.itch.io/strata" rel="noopener">itch.io</a></p>
+      <p><a href="https://store.steampowered.com/app/4791200/" rel="noopener">Steam</a></p>
+      <p><a href="https://store.steampowered.com/app/4865260/" rel="noopener">Free demo</a></p>
+    </div>
+    <div>
+      <h4>More</h4>
+      <p><a href="nodes.html">Node reference</a></p>
+      <p><a href="changelog.html">Changelog</a></p>
+      <p><a href="https://github.com/Orindoomhammer/strata-roadmap" rel="noopener">Public roadmap</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.node'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.catgroup'));
+  var cat = 'All';
+  function apply() {
+    var term = (q.value || '').trim().toLowerCase();
+    cards.forEach(function (c) {
+      var okCat = cat === 'All' || c.dataset.cat === cat;
+      var okTerm = !term || c.dataset.name.indexOf(term) > -1 ||
+                   c.textContent.toLowerCase().indexOf(term) > -1;
+      c.hidden = !(okCat && okTerm);
+    });
+    groups.forEach(function (g) {
+      g.hidden = !g.querySelector('.node:not([hidden])');
+    });
+    var n = cards.filter(function (c) { return !c.hidden; }).length;
+    document.getElementById('count').textContent =
+      n + (n === 1 ? ' node' : ' nodes');
+  }
+  chips.forEach(function (ch) {
+    ch.addEventListener('click', function () {
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+      ch.setAttribute('aria-pressed', 'true');
+      cat = ch.dataset.cat;
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+  apply();
+})();
+</script>
+
+</body>
+</html>
