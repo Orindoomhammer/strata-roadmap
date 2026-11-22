@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog — Strata</title>
+<meta name="description" content="What changed in each release of Strata, newest first. Current version 0.3.1.">
+<meta property="og:title" content="Changelog — Strata">
+<meta property="og:description" content="What changed in each release of Strata, newest first. Current version 0.3.1.">
+<meta property="og:image" content="img/keyart.jpg">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="index.html"><span class="chev"></span>STRATA</a>
+    <nav><a href="index.html">Overview</a><a href="nodes.html">Node reference</a><a href="changelog.html" class=on>Changelog</a></nav>
+    <a class="btn small" href="https://orindoomhammer.itch.io/strata" rel="noopener">Get it</a>
+  </div>
+</header>
+
+<section class="pagehead">
+  <div class="wrap narrow">
+    <h1>Changelog</h1>
+    <p class="lead">What changed in each release, newest first. Written from the point of view of
+    someone using Strata rather than someone reading its source. Current version 0.3.1.</p>
+    <p class="dim small">Releases: <a href="#v0.3.1">0.3.1</a> · <a href="#v0.3.0">0.3.0</a> · <a href="#v0.2.0">0.2.0</a></p>
+  </div>
+</section>
+<div class="wrap narrow prose changelog">
+<p>Notable changes to Strata. Dates are release dates on Steam (app 4791200).</p>
+<p>The format follows <a href="https://keepachangelog.com/en/1.1.0/" rel="noopener">Keep a Changelog</a>. Versions correspond to <code>version</code> in <code>Cargo.toml</code>.</p>
+<h2 id="v0.3.1">0.3.1<span>17 November 2026</span></h2>
+<h3>Fixed</h3>
+<ul class="plain"><li><strong>The Unity export preset wrote a file Unity cannot import.</strong> It produced 16-bit PNG, and Unity accepts neither: the Terrain Inspector&#x27;s Import Raw reads RAW only, and the Terrain Tools package&#x27;s Import Heightmap states the same. The preset now writes 16-bit little-endian raw at the same 2^n+1 resolutions, which is what <code>Terrain &gt; Import Raw</code> expects with Depth set to 16 bit and Byte Order set to Windows. Choose <strong>Generic PNG</strong> if you were relying on the old output.</li></ul>
+<h2 id="v0.3.0">0.3.0<span>17 November 2026</span></h2>
+<h3>Added</h3>
+<ul class="plain"><li><strong>Road / Path node.</strong> Draw a route over the 2D preview and get a grade-limited carriageway: it cuts into hills and fills across dips so the surface never exceeds the maximum grade you set. Width and shoulder are authored in metres, grade in percent. Outputs road and shoulder masks alongside the heightmap for your material stack.</li><li><strong>Place a Flatten Pin while walking.</strong> Press <code>P</code> in walk mode to drop a level building pad where you are standing. The node is spliced into the graph before the height output, so you can keep walking and keep siting. A brief on-screen confirmation names the pin.</li><li><strong>Crash reports.</strong> If Strata hits an unrecoverable error it now writes a report instead of vanishing: version, reason, source location, OS and architecture, GPU name and a backtrace. Written to <code>%LOCALAPPDATA%\Strata</code> on Windows and <code>~/.local/state/Strata</code> on Linux, and the path is printed on exit.</li></ul>
+<h3>Changed</h3>
+<ul class="plain"><li><strong>Progressive evaluation.</strong> Changing a parameter now redraws immediately at draft quality and refines to your chosen detail 180 ms after you stop adjusting. Dragging a slider costs roughly a third of what it did.</li><li><strong>Smaller, faster binaries.</strong> Link-time optimisation is enabled and the build is a single codegen unit. The Windows executable is 46% smaller (39.2 MB to 21.3 MB) and the Linux executable 24% smaller (34.8 MB to 26.4 MB).</li><li>The editor warns when a road is authored narrower than the preview&#x27;s sample spacing, rather than quietly drawing it wider than you asked for.</li></ul>
+<h3>Fixed</h3>
+<ul class="plain"><li><strong>Roads no longer disagree across tile boundaries in a tiled export.</strong> The elevation profile is now derived once over the whole route against the full extent, then stamped per tile, so neighbouring tiles resolve the same surface. Seam error measured at 0.000000, down from ~16 m. The equivalent problem in the River node is known and not yet fixed.</li><li>The version reported in crash reports and on the build is now the real release version. Earlier builds reported <code>0.1.0</code> regardless.</li></ul>
+<h2 id="v0.2.0">0.2.0<span>Rust rewrite</span></h2>
+<p>Strata has been rebuilt from the ground up in Rust, replacing the Electron build that shipped from May to November 2026. Existing <code>.strata</code> projects open in the new version — node ids, pin types, field keys and defaults were reproduced deliberately so saved work is not stranded.</p>
+<h3>Added</h3>
+<ul class="plain"><li><strong>Native Linux build</strong>, alongside Windows. Runs natively on Steam Deck and Linux desktops with no compatibility layer.</li><li><strong>Selectable preview detail</strong> — Draft (512), Balanced (1024) and Fine (2048) sampling, independent of physical dimensions and export settings. The Detail menu reports physical sample spacing in metres and an estimated heightmap memory cost before you commit to a level.</li><li><strong>Walk and follow cameras</strong> for inspecting terrain at player scale, in addition to the orbit camera. <code>F2</code> opens Display and <code>F3</code> opens Camera while in walk or follow mode.</li><li><strong>Guided tour</strong> covering node wiring and navigation, reopenable at any time from the Help menu.</li><li><strong>Textured 3D viewport</strong> with grass, rock, dirt, snow and riverbed materials driven by the splat stack, plus water rendering.</li></ul>
+<h3>Changed</h3>
+<ul class="plain"><li><strong>Rewritten on Rust and wgpu.</strong> Terrain evaluation runs as GPU compute kernels rather than in a browser runtime, and the application ships as a single self-contained executable instead of a bundled browser.</li><li>Height, splat, water and walking collision now all evaluate at the selected preview resolution, so what you walk on matches what you see.</li><li>The 3D viewport keeps the previous terrain texture on screen until its replacement is ready, instead of flickering during a rebuild.</li><li>Physical map dimensions persist with the project.</li><li>Save and Save As report failures in the editor and retain the previous file path when a save fails, rather than silently dropping it.</li></ul>
+<h3>Fixed</h3>
+<ul class="plain"><li><strong>Mountain Ridge raised terrain along the top edge of the map</strong> regardless of where the ridge spline was placed. The GPU shader read one spline point past the end of the uploaded data, and the out-of-bounds read introduced a phantom control point near the origin. The shader now derives its point count from the uploaded texture. Verified with a dedicated regression check (<code>cargo run --bin ridgecheck</code>) across several seeds, which also covers shared tile boundaries.</li></ul>
+<h3>Known limitations</h3>
+<ul class="plain"><li>Evaluation is synchronous, so a complex rebuild at Fine detail can briefly pause the interface. Background evaluation with cancellation is planned.</li><li>Selectable resolution does not add detail at continental scale: a 64 km world at 2048 samples still has roughly 31 m between samples.</li><li>Export writes heightmaps and masks but not yet an explicit scale manifest; engine import still leans on preset defaults.</li></ul>
+</div>
+
+<footer class="foot">
+  <div class="wrap footgrid">
+    <div>
+      <p class="brand small"><span class="chev"></span>STRATA</p>
+      <p class="dim">Node-based terrain editor for game developers.<br>
+      Version 0.3.1. Windows and Linux, native.</p>
+    </div>
+    <div>
+      <h4>Get it</h4>
+      <p><a href="https://orindoomhammer.itch.io/strata" rel="noopener">itch.io</a></p>
+      <p><a href="https://store.steampowered.com/app/4791200/" rel="noopener">Steam</a></p>
+      <p><a href="https://store.steampowered.com/app/4865260/" rel="noopener">Free demo</a></p>
+    </div>
+    <div>
+      <h4>More</h4>
+      <p><a href="nodes.html">Node reference</a></p>
+      <p><a href="changelog.html">Changelog</a></p>
+      <p><a href="https://github.com/Orindoomhammer/strata-roadmap" rel="noopener">Public roadmap</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
